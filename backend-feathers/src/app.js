@@ -45,17 +45,21 @@ app.configure(mongoose);
 // Configure other middleware (see `middleware/index.js`)
 app.configure(middleware);
 app.configure(authentication);
-// Set up our services (see `services/index.js`)
-app.configure(services);
-// Set up event channels (see channels.js)
-app.configure(channels);
+
+//Config swagger
 app.configure(swagger({
     docsPath: '/docs',
+    uiIndex: true,
     info: {
       title: 'A test',
       description: 'A description'
     }
   }))
+
+// Set up our services (see `services/index.js`)
+app.configure(services);
+// Set up event channels (see channels.js)
+app.configure(channels);
 
 // Configure a middleware for 404s and the error handler
 app.use(express.notFound());
