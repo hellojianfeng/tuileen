@@ -5,7 +5,7 @@
 module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
-  const { progressSchema } = require('./common-schemas');
+  const { progressSchema } = require('./common.schemas')(app);
 
   const operationRole = new Schema({
     oid: { type: Schema.Types.ObjectId },
@@ -42,7 +42,7 @@ module.exports = function (app) {
     concurrent: { type: Number },
     allow_concurrent:{ type: Number },
     stages: [ operationStage ],
-    progress: { type: progressSchema }, //percentage value
+    progress: progressSchema , //percentage value
   }, {
     timestamps: true
   });

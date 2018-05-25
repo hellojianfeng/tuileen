@@ -47,18 +47,18 @@ module.exports = function (app) {
     data: { type: Schema.Types.Mixed }
   });
 
-  const workflowSchema = new Schema({
-    name: String,//in each app, workflow name should be unique
-    display_name: String,
-    works: [workSchema],
-    data: Schema.Types.Mixed
-  });
-
   const workSchema = new Schema({
     name: String, //in each workflow work name should be unique
     display_name: String,
     operations: [String],//operation name array, operation can from other app, but should in one org
     workflows: [String] //workflow name array
+  });
+
+  const workflowSchema = new Schema({
+    name: String,//in each app, workflow name should be unique
+    display_name: String,
+    works: [workSchema],
+    data: Schema.Types.Mixed
   });
 
   const appDefinition = new Schema({
@@ -88,7 +88,7 @@ module.exports = function (app) {
       org: { oid: { type: Schema.Types.ObjectId }},
       data: { type: Schema.Types.Mixed }
     },
-    data: { type: Mixed }
+    data: { type: Schema.Types.Mixed }
   }, {
     timestamps: true
   });

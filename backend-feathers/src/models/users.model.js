@@ -4,7 +4,7 @@
 // for more of what you can do here.
 module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
-
+  const { Schema } = mongooseClient;
   const userRole = new Schema({
     path: { type: String }, //for example, ready, start, end, ....
     oid: { type: Schema.Types.ObjectId },

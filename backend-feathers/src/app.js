@@ -20,6 +20,8 @@ const mongoose = require('./mongoose');
 
 const authentication = require('./authentication');
 
+const swagger = require('feathers-swagger');
+
 const app = express(feathers());
 
 // Load app configuration
@@ -47,6 +49,13 @@ app.configure(authentication);
 app.configure(services);
 // Set up event channels (see channels.js)
 app.configure(channels);
+app.configure(swagger({
+    docsPath: '/docs',
+    info: {
+      title: 'A test',
+      description: 'A description'
+    }
+  }))
 
 // Configure a middleware for 404s and the error handler
 app.use(express.notFound());

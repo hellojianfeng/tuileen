@@ -17,6 +17,7 @@
 module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
+  const { progressSchema } = require('./common.schemas')(app);
   const operationProcessing = new Schema({
     operation: { 
       oid: { type: Schema.Types.ObjectId },
