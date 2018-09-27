@@ -13,8 +13,60 @@ module.exports = function (app) {
     paginate
   };
 
+  const docs = {
+    //if we want to add the mongoose model to the 'definitions' so it is a named model in the swagger ui:
+    definitions: {
+      roles: {
+        "type": "object",
+        "required": [
+          "name","path","org"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "role name, it is a unique name in organization"
+          },
+          "display_name": {
+            "type": "string",
+            "description": "role's display name"
+          },
+          "path": {
+            "type": "string",
+            "description": "dot separated string, like admin.sales,unique in organization"
+          },
+          "parent": {
+            "type": "objectId",
+            "description": "parent of role, null or ObjectId"
+          },
+          "org": {
+            "type": "object",
+            "required": ["oid","name"],
+            "properties":{
+              "oid": {
+                "type": "objectId",
+                "description": "objectId of organization"
+              },
+              "name": {
+                "type": "string",
+                "description": "name of organization"
+              },
+            },  
+          },
+          "data": {
+            "type": "mixed",
+            "description": "any other data for organization"
+          }
+        }
+      }
+    }
+  }
+
   // Initialize our service with any options it requires
-  app.use('/roles', createService(options));
+  //console.log('json model',Model.schema.obj);
+  app.use('/roles', Object.assign(createService(options),{docs: docs}));
+
+  // Initialize our service with any options it requires
+  //app.use('/roles', createService(options));
 
   // Get our initialized service so that we can register hooks and filters
   const service = app.service('roles');

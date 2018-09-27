@@ -51,8 +51,8 @@ app.configure(swagger({
     docsPath: '/docs',
     uiIndex: true,
     info: {
-      title: 'A test',
-      description: 'A description'
+      title: 'Tuileen API Document',
+      description: 'Tuileen API Document'
     }
   }))
 
