@@ -36,8 +36,14 @@ module.exports = function (app) {
   const operations = new Schema({
     name: { type: String, required: true },
     display_name: { type: String },
-    appid: { type: Schema.Types.ObjectId, required: true  },
-    org: { type: Schema.Types.ObjectId, required: true  },
+    app: { 
+      oid: { type: Schema.Types.ObjectId, required: true },
+      data: { type: Schema.Types.Mixed } 
+     },
+    org: { 
+      oid: { type: Schema.Types.ObjectId, required: true  },
+      data: { type: Schema.Types.Mixed  }
+    },
     roles: [ operationRole ],
     concurrent: { type: Number },
     allow_concurrent:{ type: Number },
