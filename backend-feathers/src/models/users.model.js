@@ -6,7 +6,6 @@ module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
   const userRole = new Schema({
-    path: { type: String }, //for example, ready, start, end, ....
     oid: { type: Schema.Types.ObjectId },
     org: { 
       oid: { type: Schema.Types.ObjectId },
@@ -16,18 +15,26 @@ module.exports = function (app) {
 
   const users = new mongooseClient.Schema({
   
-    email: {type: String, unique: true},
+    email: {
+      address: String,//null or unique
+      isVerified: { type: Boolean, default: false },
+      data: {
+        type: Schema.Types.Mixed
+      }
+    },
     mobile: {
       number: String,//null or unique
-      verified: { type: Boolean, default: false },
+      isVerified: { type: Boolean, default: false },
       data: {
         type: Schema.Types.Mixed
       }
      }, 
-    userid: {type: String }, //null or unique
+    username: { type: String }, //unique, if not provide, will generate automatically
+    surname: { type: String },
+    familyname: { type:String },
     roles: [ { type: userRole }],
     password: { type: String },
-  
+    salt: { type: String },
   
     auth0Id: { type: String },
   

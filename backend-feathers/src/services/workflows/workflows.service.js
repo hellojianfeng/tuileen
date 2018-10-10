@@ -24,11 +24,11 @@ module.exports = function (app) {
         "properties": {
           "name": {
             "type": "string",
-            "description": "role name, it is a unique name in organization"
+            "description": "workflow name, it is a unique name in organization"
           },
           "display_name": {
             "type": "string",
-            "description": "role's display name"
+            "description": "workflow's display name"
           },
           "org": {
             "type": "object",
@@ -94,11 +94,11 @@ module.exports = function (app) {
                     "properties":{
                       "oid": {
                         "type": "objectId",
-                        "description": "objectId of app"
+                        "description": "objectId of workflow"
                       },
                       "data": {
                         "type": "mixed",
-                        "description": "operation data in app"
+                        "description": "workflow data in current workflow"
                       },
                     }
                   }
