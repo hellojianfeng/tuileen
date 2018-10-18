@@ -2,7 +2,6 @@
 const createService = require('feathers-mongoose');
 const createModel = require('../../models/orgs.model');
 const hooks = require('./orgs.hooks');
-const swagger = require('feathers-swagger');
 
 module.exports = function (app) {
   const Model = createModel(app);
@@ -48,38 +47,40 @@ module.exports = function (app) {
     //if we want to add the mongoose model to the 'definitions' so it is a named model in the swagger ui:
     definitions: {
       orgs: {
-        "type": "object",
-        "required": [
-          "name"
+        'type': 'object',
+        'required': [
+          'name'
         ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "organization name, it is a unique name"
+        'properties': {
+          'name': {
+            'type': 'string',
+            'description': 'organization name, it is a unique name'
           },
-          "display_name": {
-            "type": "string",
-            "description": "organization's display name"
+          'display_name': {
+            'type': 'string',
+            'description': 'organization\'s display name'
           },
-          "profiles": {
-            "type": "array of orgProfile",
-            "description": "a lot of information for organization, like photos, icons"
+          'profiles': {
+            'type': 'array of orgProfile',
+            'description': 'a lot of information for organization, like photos, icons'
           },
-          "data": {
-            "type": "mixed",
-            "description": "any other data for organization"
+          'data': {
+            'type': 'mixed',
+            'description': 'any other data for organization'
           }
         }
       }
     }
-  }
+  };
 
   // Initialize our service with any options it requires
   //console.log('json model',Model.schema.obj);
-  app.use('/orgs', Object.assign(createService(options),{docs: docs}));
+  app.use('/orgs', Object.assign(createService(options), {
+    docs: docs
+  }));
 
   // Get our initialized service so that we can register hooks and filters
   const service = app.service('orgs');
 
-  service.hooks(hooks);  
+  service.hooks(hooks);
 };

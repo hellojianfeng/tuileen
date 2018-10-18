@@ -5,40 +5,14 @@
 module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
-  
-  const operationRoleDefinition = new Schema({
-    name: { type: String },
-    include: {
-      roles: [ { type: String } ],//array of role path
-      recursive_roles: [ { type: String } ],//array of role path
-      children: { type: String, enum: ['recursive','true','false'] },
-      parent: { type: String, enum: ['recursive','true','false'] },
-    },
-    exclude: {
-      roles: [ { type: String } ],//array of role path
-      recursive_roles: [ { type: String } ],//array of role path
-      children: { type: String, enum: ['recursive','true','false'] },
-      parent: { type: String, enum: ['recursive','true','false'] },
-    },
-    data: { type: Schema.Types.Mixed }
-  });
 
   const operationStageDefinition = new Schema({
-      name: { type: String }, //for example, ready, start, end, ....
-      display_name: { type: String },
-      start: { type: Schema.Types.Mixed }, //usually it is a expression for start
-      end: { type: Schema.Types.Mixed },//usually it is a expression for start
-      expire: { type: Schema.Types.Mixed },//usually it is a expression for start
-      data: { type: Schema.Types.Mixed }
-  });
-
-  const operationDefinition = new Schema({
-      name: { type: String },
-      display_name: { type: String },
-      roles: [ { type: operationRoleDefinition } ], //who can access this operation
-      allow_concurrent: { type: Number },//operation is executed one by one or not, if negative or 0, means unlimited
-      stages: [ { type: operationStageDefinition }],//for example, stages of ready, start, end, expire and so on
-      data: { type: Schema.Types.Mixed }
+    name: { type: String }, //for example, ready, start, end, ....
+    display_name: { type: String },
+    start: { type: Schema.Types.Mixed }, //usually it is a expression for start
+    end: { type: Schema.Types.Mixed },//usually it is a expression for start
+    expire: { type: Schema.Types.Mixed },//usually it is a expression for start
+    data: { type: Schema.Types.Mixed }
   });
 
   const roleDefinition = new Schema({
@@ -75,7 +49,7 @@ module.exports = function (app) {
     installer: { 
       org: { oid: { type: Schema.Types.ObjectId }},
       data: { type: Schema.Types.Mixed }
-     },
+    },
     creator: {
       org: { oid: { type: Schema.Types.ObjectId }},
       data: { type: Schema.Types.Mixed }
